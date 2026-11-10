@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RentHub – Rental, Maintenance & Amenity Platform</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ============ LOGIN ============ -->
+    <section id="login-view" class="view active">
+    <div class="card login-card">
+    <h1>RentHub</h1>
+    <p class="muted">Rental, maintenance & amenity management</p>
+
+    <form id="login-form">
+        <label>Your name
+        <input id="login-name" required placeholder="Your name">
+        </label>
+
+        <label>Email
+        <input id="login-email" type="email" required
+                placeholder="you@example.com">
+        </label>
+
+        <label>Password
+        <input id="login-password" type="password"
+                required minlength="8" placeholder="At least 8 characters">
+        </label>
+
+        <label>I am a
+        <select id="login-role">
+            <option value="tenant">Tenant</option>
+            <option value="owner">Property owner / staff</option>
+        </select>
+        </label>
+
+        <label>Property
+        <select id="login-property" required></select>
+        </label>
+
+        <button type="submit" class="btn primary">Sign in</button>
+        <button type="button" id="register-btn" class="btn">
+        Create account
+        </button>
+
+        <p id="login-msg" class="muted"></p>
+    </form>
+    </div>
+</section>
+
+    <!-- ============ APP ============ -->
+    <section id="app-view" class="view">
+    <header class="topbar">
+        <div class="brand">RentHub</div>
+        <nav>
+        <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
+        <button class="nav-btn" data-tab="maintenance">Maintenance</button>
+        <button class="nav-btn" data-tab="amenities">Amenities</button>
+        </nav>
+        <div class="user-box">
+        <span id="user-label"></span>
+        <button id="logout-btn" class="btn ghost small">Sign out</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="live-indicator" class="live">● Live – updates appear instantly across open tabs</div>
+
+        <!-- DASHBOARD -->
+        <section id="tab-dashboard" class="tab active">
+        <div id="kpi-grid" class="kpi-grid"></div>
+        <div class="two-col">
+            <div class="card">
+            <h2>Maintenance status</h2>
+            <div id="maint-chart"></div>
+            </div>
+            <div class="card">
+            <h2>Amenity usage (bookings)</h2>
+            <div id="amenity-chart"></div>
+            </div>
+        </div>
+        </section>
+
+        <!-- MAINTENANCE -->
+        <section id="tab-maintenance" class="tab">
+        <div class="card">
+            <h2>New maintenance request</h2>
+            <form id="maint-form" class="grid-form">
+            <select id="maint-property" required></select>
+            <input id="maint-title" placeholder="Short title, e.g. Leaking tap" required />
+            <textarea id="maint-desc" rows="3" placeholder="Describe the issue" required></textarea>  
+            <button type="submit" class="btn primary">Submit request</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <div class="row-between">
+            <h2>Requests</h2>
+            <select id="maint-filter">
+                <option value="all">All statuses</option>
+                <option>Pending</option>
+                <option>In Progress</option>
+                <option>Completed</option>
+            </select>
+            </div>
+            <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th><th>Property</th><th>Issue</th><th>Status</th>
+                    <th>Created</th><th>Resolved</th><th>Update</th>
+                </tr>
+                </thead>
+                <tbody id="maint-body"></tbody>
+            </table>
+            </div>
+        </div>
+        </section>
+
+        <!-- AMENITIES -->
+        <section id="tab-amenities" class="tab">
+        <div class="two-col">
+            <div class="card">
+            <h2>Book an amenity</h2>
+            <form id="booking-form" class="grid-form">
+                <label>Amenity
+                <select id="book-amenity" required></select>
+                </label>
+                <label>Date
+                <input type="date" id="book-date" required />
+                </label>
+                <div class="time-row">
+                <label>Check-in
+                    <input type="time" id="book-in" required />
+                </label>
+                <label>Check-out
+                    <input type="time" id="book-out" required />
+                </label>
+                </div>
+                <button type="submit" class="btn primary">Book</button>
+            </form>
+            <p id="book-msg" class="muted"></p>
+            </div>
+
+            <div class="card">
+            <h2>Amenity availability</h2>
+            <div id="amenity-list"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Bookings</h2>
+            <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>Amenity</th><th>Property</th><th>Booked by</th><th>Date</th>
+                    <th>Check-in</th><th>Check-out</th><th>Status</th><th>Action</th>
+                </tr>
+                </thead>
+                <tbody id="booking-body"></tbody>
+            </table>
+            </div>
+        </div>
+        </section>
+    </main>
+    </section>
+
+    <div id="toast" class="toast"></div>
+    <script src="script.js"></script>
+</body>
+</html>
